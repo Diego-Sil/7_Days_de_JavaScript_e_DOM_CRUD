@@ -7,9 +7,8 @@ form.addEventListener("submit",(e)=>{
   let nome = form.nome.value;
   let dataNasc = form.dataNascimento.value;
   const novaPessoa = new pessoa (nome, dataNasc)
-  
-  console.log(novaPessoa);
   tabela.appendChild(criaTr(novaPessoa))
+  limpaCampos()  
 });
 
 
@@ -32,4 +31,9 @@ function criaTr(pessoa){
   tr.appendChild(criaTd(pessoa.nome))
   tr.appendChild(criaTd(pessoa.dataNascimento))
   return tr
+}
+
+function limpaCampos(){
+  nome.value = ''
+  dataNascimento.value = ''
 }
