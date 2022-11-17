@@ -1,6 +1,6 @@
 let form = document.querySelector('.js-form');
 let tabela = document.querySelector('.js-table');
-let pessoas = [];
+let arrPessoa = [];
 
 form.addEventListener('submit',(e)=>{
   e.preventDefault()
@@ -11,32 +11,28 @@ form.addEventListener('submit',(e)=>{
     'nome': nome,
     'dataNascimento': dataNasc    
   }
-  
-  tabela.appendChild(criaTr(pessoaAtual));
   salvaLocalmente(pessoaAtual)
+  criaElemento(pessoaAtual)
   limpaCampos()
 });
 
-function criaTd(dado){
-  const td = document.createElement('td')
-  td.textContent = dado
-  return td
-}
-
-function criaTr(pessoa){
-
-  let tr = document.createElement('tr')
-  tr.appendChild(criaTd(pessoa.nome))
-  tr.appendChild(criaTd(pessoa.dataNascimento))
-  return tr
-}
-
 function salvaLocalmente(pessoa){
-
-  localStorage.setItem('pessoas',JSON.stringify(pessoa))
+  arrPessoa.push(pessoa)
+  localStorage.setItem('pessoa',JSON.stringify(arrPessoa))  
 }
 
 function limpaCampos(){
   nome.value = ''
   dataNascimento.value = ''
+}
+
+function criaElemento(pessoa){
+  const tdNome = document.createElement('td')
+  const tdDateNasc = document.createElement('td')
+  tdNome.textContent = pessoa.nome
+  tdDateNasc.textContent = pessoa.dataNascimento
+  const trElemento = document.createElement('tr')
+  trElemento.appendChild(tdNome)
+  trElemento.appendChild(tdDateNasc)
+  tabela.appendChild(trElemento)
 }
