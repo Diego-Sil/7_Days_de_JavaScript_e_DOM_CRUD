@@ -1,23 +1,21 @@
-let form = document.querySelector(".js-form");
-let tabela = document.querySelector('.js-table')
+let form = document.querySelector('.js-form');
+let tabela = document.querySelector('.js-table');
+let pessoas = [];
 
-
-form.addEventListener("submit",(e)=>{
+form.addEventListener('submit',(e)=>{
   e.preventDefault()
   let nome = form.nome.value;
   let dataNasc = form.dataNascimento.value;
-  const novaPessoa = new pessoa (nome, dataNasc)
-  tabela.appendChild(criaTr(novaPessoa))
-  limpaCampos()  
-});
 
-
-class pessoa  {
-  constructor(nome, dataNasc){
-  this.nome = nome;
-  this.dataNascimento = dataNasc;
+  const pessoaAtual = {
+    'nome': nome,
+    'dataNascimento': dataNasc    
   }
-}
+  
+  tabela.appendChild(criaTr(pessoaAtual));
+  salvaLocalmente(pessoaAtual)
+  limpaCampos()
+});
 
 function criaTd(dado){
   const td = document.createElement('td')
@@ -31,6 +29,11 @@ function criaTr(pessoa){
   tr.appendChild(criaTd(pessoa.nome))
   tr.appendChild(criaTd(pessoa.dataNascimento))
   return tr
+}
+
+function salvaLocalmente(pessoa){
+
+  localStorage.setItem('pessoas',JSON.stringify(pessoa))
 }
 
 function limpaCampos(){
