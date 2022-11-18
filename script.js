@@ -10,10 +10,12 @@ form.addEventListener('submit',(e)=>{
   e.preventDefault()
   let nome = form.nome.value;
   let dataNasc = form.dataNascimento.value;
+  let id = arrPessoa.length
   
   const pessoaAtual = {
     'nome': nome,
-    'dataNascimento': dataNasc    
+    'dataNascimento': dataNasc,
+    'id': id   
   }
  
   salvaLocalmente(pessoaAtual)
