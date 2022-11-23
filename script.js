@@ -11,37 +11,36 @@ form.addEventListener('submit',(e)=>{
  
   let nome = form.nome.value;
   let dataNasc = form.dataNascimento.value;
-  const existe = arrPessoa.find( elemento => elemento.nome === nome.value )
-
+  
   const pessoaAtual = {
     'nome': nome,
     'dataNascimento': dataNasc,
-    'id': '',
+    'id': ''
   }
+  const existe = arrPessoa.find( elemento => elemento.id === pessoaAtual.id )
 
   if (existe) {
     pessoaAtual.id = existe.id
     
-    atualizaElemento(pessoaAtual,existe.nome,existe.dataNasc)
+    atualizaElemento(pessoaAtual)
 
     arrPessoa[arrPessoa.findIndex(elemento => elemento.id === existe.id)] = pessoaAtual
 } else {
     pessoaAtual.id = arrPessoa[arrPessoa.length -1] ? (arrPessoa[arrPessoa.length-1]).id + 1 : 0;
+    criaElemento(pessoaAtual)
+    arrPessoa.push(pessoaAtual)
   }
   
   salvaLocalmente(pessoaAtual)
-  criaElemento(pessoaAtual)
   limpaCampos()
 });
 
-function salvaLocalmente(pessoa){
-  arrPessoa.push(pessoa)
+function salvaLocalmente(){
   localStorage.setItem('pessoa',JSON.stringify(arrPessoa))  
 }
 
-function atualizaElemento(pessoa) {
-    arrPessoa[pessoa.id].nome = pessoa.nome
-    arrPessoa[pessoa.id].dataNasc = pessoa.dataNasc
+function atualizaElemento(pessoa){
+  document.querySelector("[data-id='"+pessoa.id+"']").innerHTML = pessoa.nome
 }
 
 function limpaCampos(){
@@ -57,6 +56,7 @@ function criaElemento(pessoa){
   const trElemento = document.createElement('tr')
   trElemento.appendChild(tdNome)
   trElemento.appendChild(tdDateNasc)
+  trElemento.dataset.id = pessoa.id
   trElemento.appendChild(criaBotaoAtualiza(pessoa))
   trElemento.appendChild(criaBotaoDeleta(pessoa.id))
 
@@ -75,7 +75,8 @@ function criaBotaoAtualiza(pessoa){
 function exibePessoa(pessoa){
   form.nome.value = pessoa.nome;
   form.dataNascimento.value = pessoa.dataNascimento;
-  const existe = arrPessoa.find(element => element.id === pessoa.id)
+  pessoa.id.value = pessoa.id
+  console.log(pessoa)
 }
 
 function criaBotaoDeleta(id){
