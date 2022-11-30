@@ -1,31 +1,32 @@
 let form = document.querySelector('.js-form');
 let tabela = document.querySelector('.js-table');
 let arrPessoa = JSON.parse(localStorage.getItem('pessoa')) || [];
+let idModificador = ''
 
 arrPessoa.forEach((element) =>{
   criaElemento(element)
 })
 
-form.addEventListener('submit',(e)=>{
-  e.preventDefault()
- 
-  let nome = form.nome.value;
-  let dataNasc = form.dataNascimento.value;
-  
-  const pessoaAtual = {
-    'nome': nome,
-    'dataNascimento': dataNasc,
-    'id': ''
-  }
-  const existe = arrPessoa.find( elemento => elemento.id === pessoaAtual.id )
+form.addEventListener('submit',(evento)=>{
+  evento.preventDefault()
 
+  const nome = evento.target.elements['nome']
+  const dataNasc = evento.target.elements['dataNascimento']
+  const existe = arrPessoa.find( elemento => elemento.id === idModificador )
+  console.log(idModificador)
+  let id = '-1'
+  const pessoaAtual = {
+    'nome': nome.value,
+    'dataNascimento': dataNasc.value,
+    'id': id
+  }
+  
   if (existe) {
     pessoaAtual.id = existe.id
-    
     atualizaElemento(pessoaAtual)
-
     arrPessoa[arrPessoa.findIndex(elemento => elemento.id === existe.id)] = pessoaAtual
-} else {
+    console.log(pessoaAtual)
+  }else {
     pessoaAtual.id = arrPessoa[arrPessoa.length -1] ? (arrPessoa[arrPessoa.length-1]).id + 1 : 0;
     criaElemento(pessoaAtual)
     arrPessoa.push(pessoaAtual)
@@ -39,44 +40,51 @@ function salvaLocalmente(){
   localStorage.setItem('pessoa',JSON.stringify(arrPessoa))  
 }
 
-function atualizaElemento(pessoa){
-  document.querySelector("[data-id='"+pessoa.id+"']").innerHTML = pessoa.nome
-}
 
 function limpaCampos(){
   nome.value = ''
   dataNascimento.value = ''
 }
 
+
+
+function criaBotaoAtualiza(id){
+  const btnAtualiza = document.createElement('button')
+  btnAtualiza.innerHTML = 'Atualiza'
+  btnAtualiza.addEventListener('click', function(){
+    exibePessoa(this.parentNode)
+  })
+  return btnAtualiza
+}
+
+function exibePessoa(tag){
+  const nomeElemento = tag.childNodes[0].textContent
+  const dataNascElemento =  tag.childNodes[1].textContent
+  form.nome.value = nomeElemento;
+  form.dataNascimento.value = dataNascElemento;
+  idModificador=tag.dataset.id
+  console.log(idModificador)
+}
+
 function criaElemento(pessoa){
   const tdNome = document.createElement('td')
+  tdNome.classList.add('nome-js')
   const tdDateNasc = document.createElement('td')
+  tdDateNasc.classList.add('dataNasc-js')
   tdNome.innerHTML = pessoa.nome
   tdDateNasc.innerHTML = pessoa.dataNascimento
   const trElemento = document.createElement('tr')
   trElemento.appendChild(tdNome)
   trElemento.appendChild(tdDateNasc)
   trElemento.dataset.id = pessoa.id
-  trElemento.appendChild(criaBotaoAtualiza(pessoa))
+  trElemento.appendChild(criaBotaoAtualiza(pessoa.id))
   trElemento.appendChild(criaBotaoDeleta(pessoa.id))
-
   tabela.appendChild(trElemento)
 }
 
-function criaBotaoAtualiza(pessoa){
-  const btnAtualiza = document.createElement('button')
-  btnAtualiza.innerHTML = 'Atualiza'
-  btnAtualiza.addEventListener('click', function(){
-    exibePessoa(pessoa)
-  })
-  return btnAtualiza
-}
-
-function exibePessoa(pessoa){
-  form.nome.value = pessoa.nome;
-  form.dataNascimento.value = pessoa.dataNascimento;
-  pessoa.id.value = pessoa.id
-  console.log(pessoa)
+function atualizaElemento(pessoa){
+  document.querySelector("[data-id='"+pessoa.id+"']>.dataNasc-js").innerHTML= pessoa.dataNasc
+  document.querySelector("[data-id='"+pessoa.id+"']>.nome-js").innerHTML= pessoa.nome
 }
 
 function criaBotaoDeleta(id){
@@ -91,6 +99,5 @@ function criaBotaoDeleta(id){
 function deletaElemento(tag, id){
   tag.remove()
   arrPessoa.splice(arrPessoa.findIndex(elemento => elemento.id === id), 1)
-
   localStorage.setItem('pessoa',JSON.stringify(arrPessoa))  
 }
