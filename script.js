@@ -1,7 +1,7 @@
 let form = document.querySelector('.js-form');
 let tabela = document.querySelector('.js-table');
 let arrPessoa = JSON.parse(localStorage.getItem('pessoa')) || [];
-let idModificador = ''
+let idModificador
 
 arrPessoa.forEach((element) =>{
   criaElemento(element)
@@ -12,13 +12,12 @@ form.addEventListener('submit',(evento)=>{
 
   const nome = evento.target.elements['nome']
   const dataNasc = evento.target.elements['dataNascimento']
-  const existe = arrPessoa.find( elemento => elemento.id === idModificador )
+  const existe = arrPessoa.find( elemento => elemento.id === parseInt(idModificador) )
   console.log(idModificador)
-  let id = '-1'
   const pessoaAtual = {
     'nome': nome.value,
     'dataNascimento': dataNasc.value,
-    'id': id
+    'id': idModificador
   }
   
   if (existe) {
@@ -44,6 +43,7 @@ function salvaLocalmente(){
 function limpaCampos(){
   nome.value = ''
   dataNascimento.value = ''
+  idModificador = ''
 }
 
 
@@ -83,7 +83,7 @@ function criaElemento(pessoa){
 }
 
 function atualizaElemento(pessoa){
-  document.querySelector("[data-id='"+pessoa.id+"']>.dataNasc-js").innerHTML= pessoa.dataNasc
+  document.querySelector("[data-id='"+pessoa.id+"']>.dataNasc-js").innerHTML= pessoa.dataNascimento
   document.querySelector("[data-id='"+pessoa.id+"']>.nome-js").innerHTML= pessoa.nome
 }
 
