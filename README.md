@@ -49,5 +49,9 @@ a submissão do formulário
 
 ## Tarefas do dia 5
 
-- [] Adicionar botão "Deletar" a cada linha da tabela
-- [] Ao clicar o "Deletar", os dados da linha em questão deletados do localStorange e os seus respectivos elementos na interface.
+- [x] Adicionar botão "Deletar" a cada linha da tabela
+- [x] Ao clicar o "Deletar", os dados da linha em questão seram deletados do localStorange e os seus respectivos elementos na interface.
+
+## Tarefa do dia 6
+
+- [] Estilize o projeto. buque referencias de um layout na internet. 
