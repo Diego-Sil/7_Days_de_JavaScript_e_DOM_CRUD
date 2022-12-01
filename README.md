@@ -1,3 +1,9 @@
+A proposta do projeto é criar um CRUD (Create, Read, Update, Delete). Ou seja nossa aplicação receberar dados, que devem ser disponilizados para leitura, caso necessário poderam ser editados e quando for precisso excluido.
+
+Neste projeto trabalharemos com os seguintes dados:
+- Nome
+- Data de nascimento
+Receberemos estes dados salvos de forma persistente, após serem salvos seram exibidos em uma tabela abaixo, estes dados poderam ser editados e excluidos quando assim o usuario desejar
 ## Tarefas dia 1
 - [x] Colocar um titulo
 - [x] Fazer um formulario representando um pessoa
