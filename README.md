@@ -55,3 +55,12 @@ a submissão do formulário
 ## Tarefa do dia 6
 
 - [] Estilize o projeto. buque referencias de um layout na internet. 
+
+## Tarefa do dia 7
+
+- [] Hospede seu projeto. Existe alguns lugares onde você pode criar seu portfolio, como por exemplo:
+
+GitHub Pages (https://pages.github.com/)
+Vercel (https://vercel.com/)
+Vitrinedev (https://cursos.alura.com.br/vitrinedev)
+codepen( https://codepen.io/)
