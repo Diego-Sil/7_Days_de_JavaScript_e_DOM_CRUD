@@ -51,6 +51,8 @@ function limpaCampos(){
 function criaBotaoAtualiza(id){
   const btnAtualiza = document.createElement('button')
   btnAtualiza.innerHTML = 'Atualiza'
+  btnAtualiza.classList.add('botao')
+  btnAtualiza.classList.add('atualiza')
   btnAtualiza.addEventListener('click', function(){
     exibePessoa(this.parentNode)
   })
@@ -90,6 +92,8 @@ function atualizaElemento(pessoa){
 function criaBotaoDeleta(id){
   const btnDeleta = document.createElement('button')
   btnDeleta.innerHTML = 'Deletar'
+  btnDeleta.classList.add('botao')
+  btnDeleta.classList.add('deleta')
   btnDeleta.addEventListener('click', function(){
     deletaElemento(this.parentNode,id)
   })
