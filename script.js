@@ -71,8 +71,10 @@ function exibePessoa(tag){
 function criaElemento(pessoa){
   const tdNome = document.createElement('td')
   tdNome.classList.add('nome-js')
+  tdNome.classList.add('nome')
   const tdDateNasc = document.createElement('td')
   tdDateNasc.classList.add('dataNasc-js')
+  tdDateNasc.classList.add('dataNasc')
   tdNome.innerHTML = pessoa.nome
   tdDateNasc.innerHTML = pessoa.dataNascimento
   const trElemento = document.createElement('tr')
