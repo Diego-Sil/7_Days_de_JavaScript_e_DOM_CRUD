@@ -1,9 +1,17 @@
+
+:root{
+    --font-size-principal:25px;
+
+    --font-family-principal:'Roboto Flex', sans-serif;
+}
+
 body{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     background-color: #57c6e7
 }
+
 .container{
     background-color: #1b62cc;
     width: 100%;
@@ -14,6 +22,7 @@ body{
 }
 
 .titulo{
+    font-family: var(--font-family-principal);
     font-weight: bold;
     font-size: 40px;
     color: #0C122C;
@@ -27,18 +36,23 @@ body{
     width: 70%;
     margin: 2rem 0;
 }
+
 label{
     width: 100%;
     margin: 1rem;
     color: #0E1A3C;
     font-weight: bold;
-    font-size: 20px;
+    font-size:var(--font-size-principal);
+    font-family: var(--font-family-principal);
+
 }
 
 input{
     margin-left: 5px;
     height:30px;
-    font-size: 20px;
+    font-size: var(--font-size-principal);
+    font-family: var(--font-family-principal);
+
 }
 
 #nome{
@@ -52,6 +66,7 @@ input{
     color: #7fcde2;
     font-weight: bold;
     font-size: 20px;
+    font-family: var(--font-family-principal);
     background-color: #8da3dd;
     border: none;
     border-radius: 5px;
@@ -78,14 +93,18 @@ input{
 .nome-js,.dataNasc-js{
     padding: 0 5px;
     font-weight: bold;
+    font-size: var(--font-size-principal);
+    font-family: var(--font-family-principal);
 }
 
 table{
     width: 70vw;
 }
+
 .atualiza,.deleta{
-    width:8vw
+    width:8vw;
 }
+
 .nome{
     width: 30vw;
 }
@@ -93,6 +112,7 @@ table{
 .dataNasc{
     width: 15vw;
 }
+
 tr{
     display: flex;
     justify-content: center;
