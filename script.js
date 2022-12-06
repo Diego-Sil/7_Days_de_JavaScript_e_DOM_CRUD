@@ -13,10 +13,14 @@ form.addEventListener('submit',(evento)=>{
   const nome = evento.target.elements['nome']
   const dataNasc = evento.target.elements['dataNascimento']
   const existe = arrPessoa.find( elemento => elemento.id === parseInt(idModificador) )
-  console.log(idModificador)
+
+  let dataEscolhida = new Date(dataNasc.value);
+  let dataFormatada = (`${dataEscolhida.getDate()+1}/${dataEscolhida.getMonth()+1}/${dataEscolhida.getFullYear()}`)
+  console.log(dataFormatada)
+
   const pessoaAtual = {
     'nome': nome.value,
-    'dataNascimento': dataNasc.value,
+    'dataNascimento': dataFormatada,
     'id': idModificador
   }
   
@@ -24,7 +28,6 @@ form.addEventListener('submit',(evento)=>{
     pessoaAtual.id = existe.id
     atualizaElemento(pessoaAtual)
     arrPessoa[arrPessoa.findIndex(elemento => elemento.id === existe.id)] = pessoaAtual
-    console.log(pessoaAtual)
   }else {
     pessoaAtual.id = arrPessoa[arrPessoa.length -1] ? (arrPessoa[arrPessoa.length-1]).id + 1 : 0;
     criaElemento(pessoaAtual)
@@ -65,7 +68,6 @@ function exibePessoa(tag){
   form.nome.value = nomeElemento;
   form.dataNascimento.value = dataNascElemento;
   idModificador=tag.dataset.id
-  console.log(idModificador)
 }
 
 function criaElemento(pessoa){
